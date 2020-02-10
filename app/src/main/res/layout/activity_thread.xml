@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AcyncMain"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/botton1_creat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="create"
+            android:layout_weight="1"
+            />
+        <Button
+            android:id="@+id/botton2_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="start"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/botton3_creat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="cancel"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/acM_textveiw"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="this is acync main"
+        android:textSize="50sp"
+        android:visibility="gone"
+        />
+    </LinearLayout>
+
