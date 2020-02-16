@@ -2,12 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <Button
         android:layout_width="wrap_content"
         android:id="@+id/f2_butu"
         android:layout_height="wrap_content"
         android:text="addmovie"
         android:layout_gravity="center"></Button>
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/f2_butu_remove"
+        android:layout_height="wrap_content"
+        android:text="removedb"
+        android:layout_gravity="center"></Button></LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/FM_rv"

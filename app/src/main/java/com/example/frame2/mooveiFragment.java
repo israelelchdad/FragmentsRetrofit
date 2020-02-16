@@ -32,6 +32,7 @@ public class mooveiFragment extends Fragment implements OnMooveiClickLisener {
     private RecyclerView.LayoutManager mylayoutManager;
     private RecyclerView.Adapter myAdapter;
     Button buttonAddMOvieLst;
+    Button removedatabase;
     int counter =1;
     static int corectPosishen;
     static final String key = "key";
@@ -73,6 +74,13 @@ public class mooveiFragment extends Fragment implements OnMooveiClickLisener {
         myRecyclerView = vveiw.findViewById(R.id.FM_rv);
         intimyRecyclerView();
         buttonAddMOvieLst = vveiw.findViewById(R.id.f2_butu);
+        removedatabase = vveiw.findViewById(R.id.f2_butu_remove);
+        removedatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppDatabass.getinstansce(getActivity()).movieDeo().DeletAll();
+            }
+        });
         buttonAddMOvieLst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,10 +98,6 @@ public class mooveiFragment extends Fragment implements OnMooveiClickLisener {
                                 myresults.clear();
                                 myresults.addAll(myNewResulttt);
                                 myAdapter.notifyDataSetChanged();
-
-
-
-
                             }
                         }
 
@@ -102,12 +106,7 @@ public class mooveiFragment extends Fragment implements OnMooveiClickLisener {
 
                         }
                     });
-
-                }
-
-
-
-
+            }
         });
 
 
@@ -129,5 +128,10 @@ public class mooveiFragment extends Fragment implements OnMooveiClickLisener {
         if (myonMovieFragmentClickListener != null) {
             myonMovieFragmentClickListener.OnMooveiClicked((myresults.get(ItemPositiom)));
         }
+    }
+    public void  setData(ArrayList<Result> results){
+        myresults.clear();
+        myresults.addAll(results);
+        myAdapter.notifyDataSetChanged();
     }
 }

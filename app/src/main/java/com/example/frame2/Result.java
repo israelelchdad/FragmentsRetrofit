@@ -4,11 +4,16 @@ package com.example.frame2;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+@Entity
 public class Result implements Parcelable {
+
+
 
     @SerializedName("popularity")
     @Expose
@@ -24,6 +29,7 @@ public class Result implements Parcelable {
     private String posterPath;
     @SerializedName("id")
     @Expose
+    @PrimaryKey
     private Integer id;
     @SerializedName("adult")
     @Expose
@@ -37,21 +43,39 @@ public class Result implements Parcelable {
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
-    @SerializedName("genre_ids")
-    @Expose
-    private List<Integer> genreIds = null;
+//    @SerializedName("genre_ids")
+//    @Expose
+//    private List<Integer> genreIds;
     @SerializedName("title")
     @Expose
     private String title;
     @SerializedName("vote_average")
     @Expose
     private Double voteAverage;
+
+    public Result(Double popularity, Integer voteCount, Boolean video, String posterPath, Integer id, Boolean adult, String backdropPath, String originalLanguage, String originalTitle, String title, Double voteAverage, String overview, String releaseDate) {
+        this.popularity = popularity;
+        this.voteCount = voteCount;
+        this.video = video;
+        this.posterPath = posterPath;
+        this.id = id;
+        this.adult = adult;
+        this.backdropPath = backdropPath;
+        this.originalLanguage = originalLanguage;
+        this.originalTitle = originalTitle;
+        this.title = title;
+        this.voteAverage = voteAverage;
+        this.overview = overview;
+        this.releaseDate = releaseDate;
+    }
+
     @SerializedName("overview")
     @Expose
     private String overview;
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
+
 
     protected Result(Parcel in) {
         if (in.readByte() == 0) {
@@ -171,13 +195,13 @@ public class Result implements Parcelable {
         this.originalTitle = originalTitle;
     }
 
-    public List<Integer> getGenreIds() {
-        return genreIds;
-    }
+//    public List<Integer> getGenreIds() {
+//        return genreIds;
+//    }
 
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
-    }
+//    public void setGenreIds(List<Integer> genreIds) {
+//        this.genreIds = genreIds;
+//    }
 
     public String getTitle() {
         return title;

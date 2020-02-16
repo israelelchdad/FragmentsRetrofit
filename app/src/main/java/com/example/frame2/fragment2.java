@@ -28,7 +28,6 @@ public class fragment2 extends Fragment {
     private static final String moovei_bandel_string = "moovei string";
     private Result data;
     private Button bbb;
-
     private ImageView imageView1;
     private ImageView imageView2;
     private TextView titel;
@@ -53,14 +52,28 @@ public class fragment2 extends Fragment {
     }
 
     private void loadPathTrallar() {
+
         myprogres.setVisibility(View.VISIBLE);
+        ResultsItem item = AppDatabass.getinstansce(getActivity()).trailerDeo().getTrelair(data.getId());
+        if(item !=null){
+
+            String pathYouTub = "https://www.youtube.com/watch?v=";
+            String key = item.getKey();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(pathYouTub+key));
+            startActivity(intent);
+
+        }
+        else {
 
         Call<Response> myResultItem = TMDBRetrofistRest.myMooveiServich.serchTrailerById(String.valueOf(data.getId()),MainActivity.keyMoovey);
         myResultItem.enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.isSuccessful()){
+
                     resultsItems  = response.body().getResults();
+                    resultsItems.get(0).setMovieid(data.getId());
+                    AppDatabass.getinstansce(getActivity()).trailerDeo().insert(resultsItems.get(0));
                     String pathYouTub = "https://www.youtube.com/watch?v=";
                     String key = resultsItems.get(0).getKey();
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(pathYouTub+key));
@@ -75,7 +88,7 @@ public class fragment2 extends Fragment {
 
             }
         });
-    }
+    }}
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View vveiw = inflater.inflate(R.layout.farm2, container, false);

@@ -18,12 +18,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements OnMovieFragmentClickListener {
+public class  MainActivity extends AppCompatActivity implements OnMovieFragmentClickListener {
 
     private ViewPager tabletframeLayout = null;
     private Toolbar mytoolbar;
     public static final String keyMoovey = "7b46b0b9112d8d80d4ad663849665f94";
     private List<Result> mylist;
+    mooveiFragment mymooveiFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +52,33 @@ public class MainActivity extends AppCompatActivity implements OnMovieFragmentCl
     }
 
     private void loadMoveis(){
+//       AppDatabass.getinstansce(MainActivity.this).movieDeo().DeletAll();
+        List<Result> cachedMovies = AppDatabass.getinstansce(this).movieDeo().getAll();
+        if(cachedMovies !=null){
+            int a = cachedMovies.size();
+            mylist = cachedMovies;
+            mymooveiFragment = mooveiFragment.newInstant((ArrayList<Result>) mylist);
+            getSupportFragmentManager().beginTransaction().add(R.id.AM_FrameLayout, mymooveiFragment).commit();
+
+        }
+
         Call <ImegeSearchResult> myCall = TMDBRetrofistRest.myMooveiServich.searchMobiesByPepuler(keyMoovey,1);
         myCall.enqueue(new Callback<ImegeSearchResult>() {
             @Override
             public void onResponse(Call<ImegeSearchResult> call, Response<ImegeSearchResult> response) {
                 if (response.isSuccessful()){
                     mylist = response.body().getResults();
-                    mooveiFragment mymooveiFragment = mooveiFragment.newInstant((ArrayList<Result>) mylist);
-                    getSupportFragmentManager().beginTransaction().add(R.id.AM_FrameLayout, mymooveiFragment).commit();
+//                    AppDatabass.getinstansce(MainActivity.this).movieDeo().DeletAll();
+                    AppDatabass.getinstansce(MainActivity.this).movieDeo().insetAll((ArrayList<Result>)mylist);
+                    if(mymooveiFragment ==null){
+//                        mymooveiFragment = mooveiFragment.newInstant((ArrayList<Result>) mylist);
+//                        getSupportFragmentManager().beginTransaction().add(R.id.AM_FrameLayout, mymooveiFragment).commit();
+
+                    }else {
+//                        mymooveiFragment.setData((ArrayList<Result>)mylist);
+                    }
+
+
 
                     if (tabletframeLayout != null) {
                         simpelPageAdapter mysimpelPageAdapter = new simpelPageAdapter(getSupportFragmentManager(), fragmentList());
